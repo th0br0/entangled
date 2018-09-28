@@ -34,11 +34,9 @@ bazel test //...
 Buildifier can be installed with `bazel` or `go`
 
 #### Install with go
-1. change directory to `$GOPATH`
-2. run `$ go get github.com/bazelbuild/buildtools/buildifier`
+1. run `$ go get github.com/bazelbuild/buildtools/buildifier`
    The executable file will be located under `$GOPATH/bin`
-3. make a soft link for global usage, run 
-   `$ sudo ln -s $HOME/go/bin/buildifier /usr/bin/buildifier`
+2. Add `$GOPATH/bin` to your `$PATH` or copy the executable to `/usr/local/bin` or similar
 
 #### Install with bazel
 1. clone `bazelbuild/buildtools` repository
@@ -46,7 +44,7 @@ Buildifier can be installed with `bazel` or `go`
 2. change directory to `buildtools`
 3. build it with bazel command, `$ bazel build //buildifier`
    The executable file will be located under `path/to/buildtools/bazel-bin`
-4. make a soft link
+4. Copy the executable to your `$PATH` as `bazel-bin` is an ephemeral directory.
 
 ### clang-format
 clang-format can be installed by command: 
