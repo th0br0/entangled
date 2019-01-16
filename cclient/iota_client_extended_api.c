@@ -454,7 +454,7 @@ retcode_t iota_client_send_trytes(iota_client_service_t const* const serv,
   memcpy(attach_req->branch, tx_approve_res->branch, FLEX_TRIT_SIZE_243);
   memcpy(attach_req->trunk, tx_approve_res->trunk, FLEX_TRIT_SIZE_243);
   attach_req->mwm = mwm;
-  attach_req->trytes = trytes;
+  attach_req->txs = trytes;
   // attach to tangle
   ret_code = iota_client_attach_to_tangle(serv, attach_req, attach_res);
   if (ret_code) {
@@ -482,7 +482,7 @@ done:
   get_transactions_to_approve_res_free(&tx_approve_res);
   attach_to_tangle_res_free(&attach_res);
   if (attach_req) {
-    attach_req->trytes = NULL;
+    attach_req->txs = NULL;
     attach_to_tangle_req_free(&attach_req);
   }
   return ret_code;

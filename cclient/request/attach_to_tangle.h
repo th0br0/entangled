@@ -33,7 +33,7 @@ typedef struct {
   /**
    * List of trytes (raw transaction data) to attach to the tangle.
    */
-  hash8019_array_p trytes;
+  hash8019_array_p txs;
 
 } attach_to_tangle_req_t;
 

@@ -584,13 +584,13 @@ void test_serialize_attach_to_tangle(void) {
       trits_8019, NUM_TRITS_SERIALIZED_TRANSACTION,
       (const tryte_t*)TEST_2673_TRYTES_1, NUM_TRYTES_SERIALIZED_TRANSACTION,
       NUM_TRYTES_SERIALIZED_TRANSACTION));
-  hash_array_push(attach_req->trytes, trits_8019);
+  hash_array_push(attach_req->txs, trits_8019);
 
   TEST_ASSERT(flex_trits_from_trytes(
       trits_8019, NUM_TRITS_SERIALIZED_TRANSACTION,
       (const tryte_t*)TEST_2673_TRYTES_2, NUM_TRYTES_SERIALIZED_TRANSACTION,
       NUM_TRYTES_SERIALIZED_TRANSACTION));
-  hash_array_push(attach_req->trytes, trits_8019);
+  hash_array_push(attach_req->txs, trits_8019);
 
   attach_req->mwm = TEST_MWM;
 

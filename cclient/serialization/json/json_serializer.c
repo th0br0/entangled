@@ -1405,7 +1405,7 @@ retcode_t json_attach_to_tangle_serialize_request(
   cJSON_AddItemToObject(json_root, "minWeightMagnitude",
                         cJSON_CreateNumber(obj->mwm));
 
-  ret = hash8019_array_to_json_array(obj->trytes, json_root, "trytes");
+  ret = hash8019_array_to_json_array(obj->txs, json_root, "trytes");
   if (ret != RC_OK) {
     goto done;
   }
