@@ -7,11 +7,10 @@
 
 #include <string.h>
 
-#include "cclient/serialization/json/json_serializer.h"
+#include "cclient/request/requests.h"
+#include "cclient/response/responses.h"
 #include "ciri/api/api.h"
 #include "gossip/node.h"
-#include "request/requests.h"
-#include "response/responses.h"
 #include "utils/logger_helper.h"
 #include "utils/time.h"
 
@@ -508,52 +507,20 @@ retcode_t iota_api_check_consistency(iota_api_t const *const api,
 }
 
 retcode_t iota_api_init(iota_api_t *const api, node_t *const node,
-                        iota_consensus_t *const consensus,
-                        serializer_type_t const serializer_type) {
+                        iota_consensus_t *const consensus) {
   if (api == NULL) {
     return RC_NULL_PARAM;
   }
 
   logger_id = logger_helper_enable(API_LOGGER_ID, LOGGER_DEBUG, true);
-  api->running = false;
   api->node = node;
   api->consensus = consensus;
-  api->serializer_type = serializer_type;
-  if (api->serializer_type == SR_JSON) {
-    init_json_serializer(&api->serializer);
-  } else {
-    return RC_API_SERIALIZER_NOT_IMPLEMENTED;
-  }
   return RC_OK;
-}
-
-retcode_t iota_api_start(iota_api_t *const api) {
-  if (api == NULL) {
-    return RC_NULL_PARAM;
-  }
-
-  api->running = true;
-  return RC_OK;
-}
-
-retcode_t iota_api_stop(iota_api_t *const api) {
-  retcode_t ret = RC_OK;
-
-  if (api == NULL) {
-    return RC_NULL_PARAM;
-  } else if (api->running == false) {
-    return RC_OK;
-  }
-
-  api->running = false;
-  return ret;
 }
 
 retcode_t iota_api_destroy(iota_api_t *const api) {
   if (api == NULL) {
     return RC_NULL_PARAM;
-  } else if (api->running) {
-    return RC_STILL_RUNNING;
   }
 
   logger_helper_release(logger_id);

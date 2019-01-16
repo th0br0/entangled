@@ -35,8 +35,7 @@ retcode_t core_init(core_t* const core, tangle_t* const tangle) {
   }
 
   log_info(logger_id, "Initializing API\n");
-  if (iota_api_init(&core->api, &core->node, &core->consensus, SR_JSON) !=
-      RC_OK) {
+  if (iota_api_init(&core->api, &core->node, &core->consensus) != RC_OK) {
     log_critical(logger_id, "Initializing API failed\n");
     return RC_CORE_FAILED_API_INIT;
   }
@@ -61,12 +60,6 @@ retcode_t core_start(core_t* const core, tangle_t* const tangle) {
     return RC_CORE_FAILED_NODE_START;
   }
 
-  log_info(logger_id, "Starting API\n");
-  if (iota_api_start(&core->api) != RC_OK) {
-    log_critical(logger_id, "Starting API failed\n");
-    return RC_CORE_FAILED_API_START;
-  }
-
   core->running = true;
 
   return RC_OK;
@@ -87,12 +80,6 @@ retcode_t core_stop(core_t* const core) {
   if (node_stop(&core->node) != RC_OK) {
     log_error(logger_id, "Stopping node gossip components failed\n");
     ret = RC_CORE_FAILED_NODE_STOP;
-  }
-
-  log_info(logger_id, "Stopping API\n");
-  if (iota_api_stop(&core->api) != RC_OK) {
-    log_error(logger_id, "Stopping API failed\n");
-    ret = RC_CORE_FAILED_API_STOP;
   }
 
   log_info(logger_id, "Stopping consensus\n");

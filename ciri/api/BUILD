@@ -16,12 +16,10 @@ cc_library(
         ":conf",
         "//cclient/request:requests",
         "//cclient/response:responses",
-        "//cclient/serialization:serializer_json",
         "//common:errors",
         "//consensus",
         "//gossip/components:broadcaster",
         "//utils:logger_helper",
-        "//utils/handles:thread",
     ],
 )
 
